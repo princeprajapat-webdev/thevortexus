@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cmC4YtRYf2deeYZPp7OD6QrBfR9wbEEvaSWhrgQQHCE" />
+    <title>Vortexus | Ultimate Free Online Tools & Web Directory Matrix</title>
+    <meta name="description"
+        content="Access Vortexus, the ultimate all-in-one operational directory matrix. Find 100% free online tools, PDF utilities, graphic design layouts, and lifestyle web applications instantly.">
+    <meta name="keywords" content="VortexHub, operational matrix, directory, online tools, free tools">
+    <meta name="keywords"
+        content="Vortexus, vortexus web, free online tools, best web directory, pdf tools online, productivity applications matrix, utility tools">
+    <meta name="author" content="Prince Prajapat">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="vortexus.png">
+    <style>
+        :root {
+            --bg-deep: #02040a;
+            --bg-panel: #0b111e;
+            --bg-surface: #121b2d;
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-muted: rgba(255, 255, 255, 0.05);
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --accent-primary: #4f46e5;
+            --accent-glow: #818cf8;
+            --accent-neon: #06b6d4;
+            --gradient-master: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+
+            --badge-free-bg: rgba(16, 185, 129, 0.1);
+            --badge-free-txt: #34d399;
+            --badge-paid-bg: rgba(239, 68, 68, 0.1);
+            --badge-paid-txt: #f87171;
+
+            --radius-premium: 14px;
+            --transition-fluid: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            /* Layout padding scales dynamically via media queries */
+            padding-top: 170px;
+        }
+
+        /* --- NAVBAR & MATRIX CONTROLS --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-muted);
+            padding: 20px 50px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-top-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-section {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(90deg, #ffffff, var(--accent-neon), var(--accent-glow), #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            cursor: pointer;
+            animation: textFlow 5s linear infinite;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            /* लोगो और नाम को ऊपर-नीचे से एक बराबर रखता है */
+            gap: 12px;
+            /* लोगो और नाम के बीच का गैप */
+            cursor: pointer;
+            justify-self: start;
+        }
+
+        .nav-logo {
+            width: 38px;
+            /* कंप्यूटर पर लोगो का साइज */
+            height: 38px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        @keyframes textFlow {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .search-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .search-box-container {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 24px;
+            background: rgba(18, 27, 45, 0.6);
+            border: 1px solid var(--border-muted);
+            border-radius: var(--radius-premium);
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            /* Transition ko aur smooth banaya hai */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Hover effect: Jab mouse upar jaye */
+        .search-bar:hover {
+            transform: scale(1.01);
+            /* Halki si expansion */
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Focus effect: Jab click karke type kare */
+        .search-bar:focus {
+            transform: scale(1.02);
+            /* Focus par thoda zyada expand */
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+            background: #0f172a;
+            /* Thoda darker aur focused background */
+        }
+
+        /* --- CONTROLLER CAPSULES --- */
+        .filter-capsules-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            flex-wrap: wrap;
+            /* Allows wrap on small devices */
+        }
+
+        .capsule-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-muted);
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fluid);
+            white-space: nowrap;
+        }
+
+        .capsule-btn:hover,
+        .capsule-btn.active {
+            background: var(--bg-surface);
+            color: #ffffff;
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+        }
+
+        .autocomplete-panel {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            width: 100%;
+            background: rgba(11, 17, 30, 0.98);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-premium);
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 1100;
+        }
+
+        .autocomplete-row {
+            padding: 15px 24px;
+            color: var(--text-sub);
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.01);
+            transition: var(--transition-fluid);
+        }
+
+        .autocomplete-row:hover {
+            background: var(--gradient-master);
+            color: #ffffff;
+            padding-left: 32px;
+        }
+
+        /* --- CORE ARCHITECTURE LAYOUT --- */
+        .app-workspace {
+            display: flex;
+            max-width: 1650px;
+            margin: 20px auto 80px auto;
+            padding: 0 50px;
+            gap: 45px;
+        }
+
+        /* --- SIDEBAR MODULE --- */
+        .control-panel {
+            width: 360px;
+            min-width: 360px;
+            background-color: var(--bg-panel);
+            padding: 30px 22px;
+            border-radius: var(--radius-premium);
+            border: 1px solid var(--border-muted);
+            position: sticky;
+            top: 190px;
+            max-height: calc(100vh - 240px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .panel-scroller {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 4px;
+        }
+
+        .panel-scroller::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .panel-scroller::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .group-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-neon);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 26px 0 14px 10px;
+        }
+
+        .category-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 13px 18px;
+            margin-bottom: 6px;
+            border-radius: var(--radius-premium);
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-weight: 500;
+            text-align: left;
+            transition: var(--transition-fluid);
+        }
+
+        .category-trigger:hover {
+            background: rgba(255, 255, 255, 0.02);
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .category-trigger.active {
+            background: var(--gradient-master);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+
+        /* --- TOOLS GRID --- */
+        .display-section {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .grid-card {
+            background: rgba(18, 27, 45, 0.4);
+            /* Thoda transparent */
+            backdrop-filter: blur(12px);
+            /* Glass blur effect */
+            padding: 35px;
+            border-radius: var(--radius-premium);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* Light border */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .grid-card:hover {
+            border-color: var(--accent-neon);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(6, 182, 212, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .meta-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .badges-cluster {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .status-badge.free {
+            background: var(--badge-free-bg);
+            color: var(--badge-free-txt);
+        }
+
+        .status-badge.paid {
+            background: var(--badge-paid-bg);
+            color: var(--badge-paid-txt);
+        }
+
+        .status-badge.popular {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+
+        .status-badge.ai-badge {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-neon);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .bookmark-star {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1.35rem;
+            cursor: pointer;
+            transition: var(--transition-fluid);
+            outline: none;
+        }
+
+        .bookmark-star:hover {
+            color: #facc15;
+            transform: scale(1.1);
+        }
+
+        .bookmark-star.starred {
+            color: #facc15;
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+        }
+
+        .grid-card .hierarchy-tag {
+            font-size: 0.75rem;
+            color: var(--accent-neon);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .grid-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .grid-card p {
+            font-size: 0.92rem;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .card-footer-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-link {
+            flex-grow: 1;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: var(--radius-premium);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-muted);
+            transition: var(--transition-fluid);
+            white-space: nowrap;
+        }
+
+        .grid-card:hover .action-link {
+            background: var(--gradient-master);
+            border-color: transparent;
+        }
+
+        .report-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-fluid);
+            text-decoration: underline;
+            white-space: nowrap;
+        }
+
+        .report-btn:hover {
+            color: #f87171;
+        }
+
+        /* ========================================================
+           💻 EXTRA STABLE RESPONSIVE ENGINE (MEDIA QUERIES)
+           ======================================================== */
+
+        /* 1. Large Screen Adjustments (Tablets up to Laptops) */
+        @media (max-width: 1250px) {
+            body {
+                padding-top: 200px;
+            }
+
+            .navbar {
+                padding: 20px 30px;
+            }
+
+            .nav-top-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .search-wrapper {
+                grid-column: 1 / -1;
+                order: 3;
+            }
+
+            .app-workspace {
+                gap: 30px;
+                padding: 0 30px;
+                margin-top: 20px;
+            }
+
+            .control-panel {
+                width: 300px;
+                min-width: 300px;
+                top: 220px;
+                max-height: calc(100vh - 260px);
+            }
+        }
+
+        /* 2. Smaller Monitors & Tablets */
+        @media (max-width: 992px) {
+            body {
+                padding-top: 250px;
+            }
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .nav-top-row {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .app-workspace {
+                flex-direction: column;
+                padding: 0 24px;
+                gap: 20px;
+            }
+
+            /* Sidebar turns into a sleek web horizontal swipe panel */
+            .control-panel {
+                width: 100%;
+                min-width: 100%;
+                height: auto;
+                position: sticky;
+                top: 210px;
+                z-index: 900;
+                padding: 15px;
+                max-height: none;
+            }
+
+            .panel-scroller {
+                display: flex;
+                overflow-x: auto;
+                gap: 12px;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+                /* Hidden scroll bar Firefox */
+            }
+
+            .panel-scroller::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Hidden scroll bar Chrome/Safari */
+            .group-header {
+                display: none;
+            }
+
+            .category-trigger {
+                white-space: nowrap;
+                width: auto;
+                margin-bottom: 0;
+                padding: 10px 16px;
+            }
+        }
+
+        /* 3. Pure Smartphone Mobile Devices */
+        @media (max-width: 576px) {
+            body {
+                padding-top: 230px;
+            }
+
+            .navbar {
+                padding: 12px 15px;
+                gap: 10px;
+            }
+
+            .logo-section {
+                font-size: 1.5rem;
+            }
+
+            .search-bar {
+                padding: 12px 18px;
+                font-size: 0.88rem;
+            }
+
+            .filter-capsules-row {
+                gap: 6px;
+                justify-content: flex-start;
+                overflow-x: auto;
+                scrollbar-width: none;
+                width: 100%;
+                padding-bottom: 2px;
+            }
+
+            .filter-capsules-row::-webkit-scrollbar {
+                display: none;
+            }
+
+            .capsule-btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+
+            .control-panel {
+                top: 185px;
+                padding: 10px;
+            }
+
+            .category-trigger {
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+
+            .app-workspace {
+                padding: 0 15px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            /* Single column grids for mobile */
+            .grid-card {
+                padding: 22px;
+            }
+
+            .grid-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .grid-card p {
+                font-size: 0.88rem;
+                margin-bottom: 15px;
+            }
+
+            .action-link {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .grid-card {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .grid-card {
+                padding: 18px !important;
+                /* Mobile pe thoda compact */
+                gap: 10px;
+            }
+
+            .action-link {
+                padding: 14px !important;
+                /* Button ko bada karo taaki thumb se easily click ho */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-top-row">
+            <div class="logo-wrapper" onclick="window.location.reload()">
+                <img src="vortexus.png" alt="Vortexus Logo" class="nav-logo">
+                <div class="logo-section">Vortexus</div>
+            </div>
+            <div class="search-wrapper">
+                <div class="search-box-container">
+                    <input type="text" id="directorySearch" class="search-bar"
+                        placeholder="Search operational matrices, labels, or tags..." oninput="triggerSearch()"
+                        autocomplete="off">
+                    <div id="autoDrop" class="autocomplete-panel"></div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-capsules-row">
+            <button class="capsule-btn active" id="filter-all" onclick="setPricingFilter('all')">All Tools</button>
+            <button class="capsule-btn" id="filter-free" onclick="setPricingFilter('free')">100% Free Only</button>
+            <button class="capsule-btn" id="filter-paid" onclick="setPricingFilter('paid')">Premium / Paid</button>
+        </div>
+    </nav>
+
+    <main class="app-workspace">
+        <aside class="control-panel">
+            <div class="panel-scroller" id="panelScroller">
+                <button class="category-trigger active" id="trigger-all" onclick="filterCategory('all')">Universal
+                    Dashboard</button>
+                <button class="category-trigger" id="trigger-bookmarks" onclick="filterCategory('bookmarks_panel')">My
+                    Bookmarked Tools <span style="color:#facc15;">⭐️</span></button>
+            </div>
+        </aside>
+
+        <section class="display-section">
+            <div class="cards-grid" id="cardsGrid"></div>
+        </section>
+    </main>
+
+
+    <script>
+        const structuralData = {
+            "Home, Shopping & Lifestyle Hub": [
+                {
+                    subCategory: "Online Grocery & Supplies",
+                    tools: [
+                        { name: "Blinkit", pricing: "paid", desc: "Instant web terminal to order daily kitchen essentials, dairy, fresh vegetables, and emergency household products right to your door.", link: "https://blinkit.com" },
+                        { name: "Zepto", pricing: "paid", desc: "Ultra-fast direct-to-home grocery pipeline delivering bread, milk, and daily household needs via an active web portal.", link: "https://www.zeptonow.com" },
+                        { name: "BigBasket", pricing: "paid", desc: "A massive online storage market house for bulk home grocery items, grains, family cleaning utilities, and monthly packs.", link: "https://www.bigbasket.com" },
+                        { name: "Amazon Fresh", pricing: "paid", desc: "Trusted online matrix dispatching quality fresh fruits, packaged foods, and premium daily kitchen consumables.", link: "https://www.amazon.in/fresh" },
+                        { name: "Flipkart Grocery", pricing: "paid", desc: "Budget-friendly web marketplace specialized in heavy monthly kitchen stock baskets and cleaning bundles.", link: "https://www.flipkart.com/grocery-supermart-store" }
+                    ]
+                },
+                {
+                    subCategory: "Food & Restaurant Ordering",
+                    tools: [
+                        { name: "Zomato", pricing: "paid", desc: "Explore local food menus, track real-time delivery timelines, and order hot meals from nearby restaurants over the browser.", link: "https://www.zomato.com" },
+                        { name: "Swiggy", pricing: "paid", desc: "A smooth instant food dispatch dashboard sorting local gourmet menus and tracking food couriers completely on the web.", link: "https://www.swiggy.com" },
+                        { name: "EatClub", pricing: "paid", desc: "Curated web-ordering engine ideal for selecting mega party bundles and family dinner food platters without apps.", link: "https://www.eatclub.com" },
+                        { name: "Domino's", pricing: "paid", desc: "Instant direct pizza configuration interface to track and dispatch fast-food directly inside your browser tab.", link: "https://pizzaonline.dominos.co.in" },
+                        { name: "EatSure", pricing: "paid", desc: "Order multiple restaurant dishes pooled together safely inside a single integrated physical delivery cargo box.", link: "https://www.eatsure.com" }
+                    ]
+                },
+                {
+                    subCategory: "Clothing, Fashion & Decor",
+                    tools: [
+                        { name: "Myntra", pricing: "paid", desc: "Browse high-end trending fashion wear, footwear configurations, and lifestyle apparel templates via a full web matrix.", link: "https://www.myntra.com" },
+                        { name: "Amazon", pricing: "paid", desc: "The ultimate cross-category supply hub for clothing products, consumer electronics, and functional home tools.", link: "https://www.amazon.in" },
+                        { name: "Ajio", pricing: "paid", desc: "Premium online boutique interface supplying international western clothes and luxury style sets for all age brackets.", link: "https://www.ajio.com" },
+                        { name: "Meesho", pricing: "paid", desc: "Highly competitive, ultra-affordable web network dealing in household apparel, small electronics, and kitchen widgets.", link: "https://www.meesho.com" },
+                        { name: "Pepperfry", pricing: "paid", desc: "Virtual furniture and housing architecture catalog offering premium beds, chairs, curtains, and luxury lighting presets.", link: "https://www.pepperfry.com" }
+                    ]
+                }
+            ],
+            "Smart Education & Student Hub": [
+                {
+                    subCategory: "Homework & Problem Solving",
+                    tools: [
+                        { name: "Brainly", pricing: "free", desc: "An expansive peer-to-peer knowledge matrix for cracking complex academic textbook problems and school syllabus questions.", link: "https://brainly.in" },
+                        { name: "WolframAlpha", pricing: "free", desc: "Advanced computational algorithm matrix delivering immediate analytical steps for heavy physics equations and math.", link: "https://www.wolframalpha.com" },
+                        { name: "Doubtnut", pricing: "free", desc: "Instant browser video solution directory targeted at resolving deep high-school science and algebraic block problems.", link: "https://www.doubtnut.com" },
+                        { name: "Khan Academy", pricing: "free", desc: "A globally acclaimed free structured web university packing video modules from junior math up to complex history.", link: "https://khanacademy.org" },
+                        { name: "Socratic", pricing: "free", desc: "An AI search visual tool optimized to answer school-level literature, history, and chemistry concepts easily.", link: "https://socratic.org" }
+                    ]
+                },
+                {
+                    subCategory: "Memory Tools & Flashcards",
+                    tools: [
+                        { name: "AnkiWeb", pricing: "free", desc: "An intelligent active-recall server interface ideal for committing formulas, dates, and medical rules to permanent memory.", link: "https://ankiweb.net" },
+                        { name: "Quizlet", pricing: "free", desc: "A fast terminal delivering user-made flashcard decks, specialized term sets, and interactive school matching games.", link: "https://quizlet.com" },
+                        { name: "Kahoot", pricing: "free", desc: "Web-based game platform hosting custom educational multi-choice tests for students and classroom groups.", link: "https://kahoot.com" },
+                        { name: "Chegg", pricing: "free", desc: "A crowdsourced ecosystem storing hundreds of thousands of specialized higher education exam prep flashcards.", link: "https://www.chegg.com/flashcards" },
+                        { name: "Cram", pricing: "free", desc: "A clean interface dedicated to building, editing, categorizing, and exporting custom electronic text review cards.", link: "https://www.cram.com" }
+                    ]
+                },
+                {
+                    subCategory: "Notes & Lecture Systems",
+                    tools: [
+                        { name: "Notion", pricing: "free", desc: "A high-fidelity workspace allowing clean database structuring, page linking, and assignment logs without setup.", link: "https://www.notion.so" },
+                        { name: "Google Keep", pricing: "free", desc: "Color-coded minimalist browser panel for capturing lightning-fast ideas, text snippets, and task checklists.", link: "https://keep.google.com" },
+                        { name: "Evernote", pricing: "free", desc: "Advanced cloud binder that logs lecture transcripts, audio clips, and tracks multi-device school schedules.", link: "https://evernote.com" },
+                        { name: "Microsoft OneNote", pricing: "free", desc: "Multi-tab digital study notebook layout allowing infinite-canvas drafting, drawing, and school project logging.", link: "https://www.onenote.com" },
+                        { name: "Obsidian", pricing: "free", desc: "A web-connected markdown vault designed to dynamically interlink independent concept ideas like a second brain.", link: "https://obsidian.md" }
+                    ]
+                }
+            ],
+            "Corporate, Office & Business Hub": [
+                {
+                    subCategory: "Team Communication Matrix",
+                    tools: [
+                        { name: "Slack", pricing: "free", desc: "The standard internal business network for organized topic channels, file transfers, and remote text spaces.", link: "https://slack.com" },
+                        { name: "Microsoft Teams", pricing: "free", desc: "Enterprise cloud interface handling professional calls, whiteboards, and large group meetings over the web.", link: "https://www.microsoft.com/en-in/microsoft-teams/group-chat-software" },
+                        { name: "Google Chat", pricing: "free", desc: "Lightweight corporate text terminal embedded directly inside your professional Gmail productivity stack.", link: "https://chat.google.com" },
+                        { name: "Discord", pricing: "free", desc: "High-uptime voice and text server matrix preferred by modern agile design, coding, and freelance squads.", link: "https://discord.com" },
+                        { name: "Zoom", pricing: "free", desc: "A frictionless instant browser client for holding HD corporate pitches and video syncs without client files.", link: "https://zoom.us" }
+                    ]
+                },
+                {
+                    subCategory: "Task Boards & Automation",
+                    tools: [
+                        { name: "Trello", pricing: "free", desc: "Clean visual card architecture for managing short-term operational targets, tasks, and project checkpoints.", link: "https://trello.com" },
+                        { name: "Asana", pricing: "free", desc: "Dynamic multi-view corporate environment tracking macro timelines, sub-task chains, and overall team performance.", link: "https://asana.com" },
+                        { name: "Monday.com", pricing: "free", desc: "Highly graphic professional workflow boards tailored for tracing commercial leads and media project pipelines.", link: "https://monday.com" },
+                        { name: "ClickUp", pricing: "free", desc: "An aggressive all-inclusive workspace replacing fragmented spreadsheets, goals, and project docs cleanly.", link: "https://clickup.com" },
+                        { name: "Jira", pricing: "free", desc: "Heavy developer pipeline environment tailored for bug testing tracking, sprint logs, and high-tier coding roadmaps.", link: "https://www.atlassian.com/software/jira" }
+                    ]
+                },
+                {
+                    subCategory: "Time Logs & Invoicing",
+                    tools: [
+                        { name: "Clockify", pricing: "free", desc: "Free web-native operational timer designed to record active working logs and optimize employee shift metrics.", link: "https://clockify.me" },
+                        { name: "Toggl Track", pricing: "free", desc: "An aesthetic single-click desktop timer built to monitor task durations and process customer billings cleanly.", link: "https://toggl.com/track/" },
+                        { name: "Harvest", pricing: "paid", desc: "Professional corporate timer system packed with direct features for compiling custom business invoices.", link: "https://www.getharvest.com" },
+                        { name: "Hubstaff", pricing: "paid", desc: "Cloud remote workforce tracking engine that measures task velocity, time cards, and project payouts.", link: "https://hubstaff.com" },
+                        { name: "Everhour", pricing: "paid", desc: "A sleek browser utility that injects a time tracker tool directly into your existing Asana and Trello boards.", link: "https://everhour.com" }
+                    ]
+                },
+                {
+                    subCategory: "Document Utilities & PDF Tools",
+                    tools: [
+                        { name: "ILovePDF", pricing: "free", desc: "Convert PDF to JPG, merge structural documents, compress data sizes, and process image files right inside your browser.", link: "https://www.ilovepdf.com" },
+                        { name: "TinyWow", pricing: "free", desc: "A comprehensive cloud terminal offering free tools to split PDFs, convert formats, and manipulate data files without limits.", link: "https://tinywow.com" },
+                        { name: "PDF2Go", pricing: "free", desc: "Secure direct-to-web tool designed to convert JPG to PDF, encrypt documents, and repair file formats safely.", link: "https://www.pdf2go.com" },
+                        { name: "Adobe Acrobat", pricing: "free", desc: "Official premium web terminal by Adobe for absolute pixel-perfect document conversions and cloud form signings.", link: "https://www.adobe.com/acrobat/online.html" },
+                        { name: "Smallpdf", pricing: "free", desc: "Minimalist and clean drag-and-drop operational engine built for ultra-fast document conversions and compression tasks.", link: "https://smallpdf.com" }
+                    ]
+                }
+            ],
+            "Creativity, Design & Social Hub": [
+                {
+                    subCategory: "Graphic Design & UI Layouts",
+                    tools: [
+                        { name: "Canva", pricing: "free", desc: "Drag-and-drop graphic interface built to quickly structure business invites, resume matrices, and presentations.", link: "https://www.canva.com" },
+                        { name: "Figma", pricing: "free", desc: "Real-time web vector layout laboratory used for mocking mobile application UIs and high-end tech wireframes.", link: "https://www.figma.com" },
+                        { name: "Adobe Express", pricing: "free", desc: "Lightweight cloud graphic generator loaded with Adobe asset libraries and template files.", link: "https://www.adobe.com/express/" },
+                        { name: "Visme", pricing: "free", desc: "High-tier data communication suite designed to turn static raw spreadsheets into animated digital presentation charts.", link: "https://www.visme.co" },
+                        { name: "Snappa", pricing: "free", desc: "Fast image designer explicitly optimized to deliver exact, pre-cropped dimensions for ad blocks.", link: "https://snappa.com" }
+                    ]
+                },
+                {
+                    subCategory: "Photo & Video manipulation",
+                    tools: [
+                        { name: "Pixlr", pricing: "free", desc: "Layered image tuner supporting intricate mask filters and color curves inside an instant browser tab.", link: "https://pixlr.com" },
+                        { name: "CapCut", pricing: "free", desc: "Cloud-native multi-layer timeline workspace compiling video edits, trendy effects, and smart audio tracks.", link: "https://www.capcut.com/tools/online-video-editor" },
+                        { name: "Photopea", pricing: "free", desc: "An exact free browser clone of Photoshop processing PSD, Sketch, and AI master formats with zero lag.", link: "https://www.photopea.com" },
+                        { name: "BgEraser", pricing: "free", desc: "Instant automated neural network that analyzes pictures and extracts background objects cleanly in one second.", link: "https://bgeraser.com" },
+                        { name: "Clipchamp", pricing: "free", desc: "Microsoft web utility offering basic screen recordings, overlay assets, and timeline publishing tools.", link: "https://clipchamp.com" }
+                    ]
+                },
+                {
+                    subCategory: "Social Pipeline & Copywriting",
+                    tools: [
+                        { name: "Buffer", pricing: "free", desc: "Automated distributor designed to publish post blocks across multiple profile grids simultaneously.", link: "https://buffer.com" },
+                        { name: "Later", pricing: "free", desc: "A clear media pipeline that lets users preview layout grids and pre-schedule upcoming posts.", link: "https://later.com" },
+                        { name: "Copy AI", pricing: "free", desc: "An algorithmic sentence engine outputting commercial ad titles, hooks, and blog layouts in seconds.", link: "https://www.copy.ai" },
+                        { name: "Hootsuite", pricing: "paid", desc: "Enterprise brand operations deck charting global hashtag trends and bulk messaging queues.", link: "https://hootsuite.com" },
+                        { name: "Feedly", pricing: "free", desc: "A personalized RSS content accumulator tracking global industry updates and competitor releases.", link: "https://feedly.com" }
+                    ]
+                }
+            ],
+            "Health, Wellness & Longevity Hub": [
+                {
+                    subCategory: "Doctor Consultations & Labs",
+                    tools: [
+                        { name: "Practo", pricing: "paid", desc: "Direct web nexus connecting family users with specialist clinics, virtual doctors, and health appointments.", link: "https://www.practo.com" },
+                        { name: "1mg", pricing: "paid", desc: "Schedule certified medical health tests at home with smooth online tracker dashboards for PDF records.", link: "https://www.1mg.com" },
+                        { name: "Apollo 247", pricing: "paid", desc: "Round-the-clock emergency hospital doctor chat lines and online clinic bookings over the web.", link: "https://www.apollo247.com" },
+                        { name: "MediBuddy", pricing: "paid", desc: "Comprehensive portal targeted at processing family health claims, lab charts, and general checkup tickets.", link: "https://www.medibuddy.in" },
+                        { name: "PharmEasy Labs", pricing: "paid", desc: "Frictionless portal to schedule phlebotomists for blood collection and process electronic clinical charts.", link: "https://pharmeasy.in/diagnostics" }
+                    ]
+                },
+                {
+                    subCategory: "Pharmacies & Reminders",
+                    tools: [
+                        { name: "PharmEasy", pricing: "paid", desc: "Large verified drug dispatch system supplying home medicine packets from user prescription scans.", link: "https://pharmeasy.in" },
+                        { name: "Netmeds", pricing: "paid", desc: "Trusted online healthcare store distributing medical instruments and long-term generic pills.", link: "https://www.netmeds.com" },
+                        { name: "Truemeds", pricing: "paid", desc: "A smart cost-efficiency tool suggesting certified low-price generic drug alternatives for basic pills.", link: "https://www.truemeds.in" },
+                        { name: "Medisafe", pricing: "free", desc: "A visually simple calendar module to avoid dose mistakes and optimize tracking for senior users.", link: "https://www.medisafeapp.com" },
+                        { name: "MyUpchar", pricing: "free", desc: "An accessible regional medical encyclopedia delivering wellness blogs and medication support.", link: "https://www.myupchar.com" }
+                    ]
+                },
+                {
+                    subCategory: "Cognitive Exercises & Calorie Logs",
+                    tools: [
+                        { name: "Lumosity", pricing: "free", desc: "Interactive cognitive modules developed to maintain attention scores and processing speeds for seniors.", link: "https://www.lumosity.com" },
+                        { name: "MyFitnessPal", pricing: "free", desc: "A worldwide food ledger database perfect for logging macro nutrients and calculating meal weight tracks.", link: "https://www.myfitnesspal.com" },
+                        { name: "CogniFit", pricing: "free", desc: "Clinical level brain training tasks measuring visual memory retention and response speeds over the web.", link: "https://www.cognifit.com" },
+                        { name: "Cult.fit", pricing: "free", desc: "Stream yoga tutorials, bodyweight routines, and plan healthy calorie-controlled diet frames.", link: "https://www.cult.fit" },
+                        { name: "Strava", pricing: "free", desc: "Examine walking metrics, cycling route files, and cardio performance milestones on an interactive UI.", link: "https://www.strava.com" }
+                    ]
+                }
+            ],
+            "Smart Home & Domestic Services": [
+                {
+                    subCategory: "On-Demand Home Repairs",
+                    tools: [
+                        { name: "Urban Company", pricing: "paid", desc: "Deploy vetted home appliance mechanics, AC tuners, and deep-house cleaner technicians via the web.", link: "https://www.urbancompany.com" },
+                        { name: "Housejoy", pricing: "paid", desc: "Professional matrix providing systematic pipeline mapping, house structural setups, and sanitization.", link: "https://www.housejoy.in" },
+                        { name: "NoBroker", pricing: "paid", desc: "Order household moving cargo groups, expert painters, and residential deep cleaning teams securely.", link: "https://www.nobroker.in/home-services" },
+                        { name: "Mr. Right", pricing: "paid", desc: "Instant web directory sorting local electrical fixers, plumbing teams, and electronic repair setups.", link: "https://www.mrright.in" },
+                        { name: "TaskBob", pricing: "paid", desc: "Sleek web-request console for hiring on-demand local mechanics for quick household fixing.", link: "https://www.taskbob.com" }
+                    ]
+                },
+                {
+                    subCategory: "Residential Guard & Billing",
+                    tools: [
+                        { name: "MyGate", pricing: "paid", desc: "Web dashboard monitoring neighborhood delivery logs, apartment access permits, and employee records.", link: "https://mygate.com" },
+                        { name: "NoBrokerHood", pricing: "paid", desc: "Community security software supporting residential intercom codes and electronic utility bill payouts.", link: "https://www.nobrokerhood.com" },
+                        { name: "Adda", pricing: "paid", desc: "Global estate software handling community cash tracking logs, accounting data, and event updates.", link: "https://adda.io" },
+                        { name: "Gatekeeper", pricing: "paid", desc: "High-grade automated security hub recording and registering standalone villa guest arrivals.", link: "https://www.adt.com" },
+                        { name: "SmartSociety", pricing: "paid", desc: "Automated neighborhood manager charting estate upkeep data and tracking security personnel sheets.", link: "https://smartsociety.in" }
+                    ]
+                }
+            ]
+        };
+
+        const trendingTools = ["Canva", "Figma", "Notion", "ILovePDF", "Zomato", "Swiggy", "Trello", "Slack"];
+        const aiDrivenTools = ["Copy AI", "Socratic", "WolframAlpha", "BgEraser"];
+
+        let masterToolsRegistry = [];
+        let uniqueSubCategories = [];
+        let bookmarkedRegistry = JSON.parse(localStorage.getItem('vortex_bookmarks')) || [];
+
+        Object.keys(structuralData).forEach(fieldGroup => {
+            structuralData[fieldGroup].forEach(subObj => {
+                if (!uniqueSubCategories.includes(subObj.subCategory)) {
+                    uniqueSubCategories.push(subObj.subCategory);
+                }
+                subObj.tools.forEach(t => {
+                    masterToolsRegistry.push({
+                        ...t,
+                        category: subObj.subCategory,
+                        parentField: fieldGroup
+                    });
+                });
+            });
+        });
+
+        masterToolsRegistry.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+
+        function renderEcosystemControls() {
+            const scroller = document.getElementById("panelScroller");
+
+            Object.keys(structuralData).forEach(fieldGroup => {
+                const headerDiv = document.createElement("div");
+                headerDiv.classList.add("group-header");
+                headerDiv.innerText = fieldGroup;
+                scroller.appendChild(headerDiv);
+
+                structuralData[fieldGroup].forEach(subObj => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("category-trigger");
+                    btn.id = `trigger-${subObj.subCategory.replace(/\s+/g, '-').toLowerCase()}`;
+                    btn.setAttribute("onclick", `filterCategory('${subObj.subCategory}')`);
+                    btn.innerHTML = `${subObj.subCategory} <span>➔</span>`;
+                    scroller.appendChild(btn);
+                });
+            });
+        }
+
+        function presentSortedTools(tools) {
+            const grid = document.getElementById("cardsGrid");
+            grid.innerHTML = "";
+
+            if (tools.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 40px; font-size: 1.1rem;">No digital applications found matching the active filters.</div>`;
+                return;
+            }
+
+            tools.forEach((tool) => {
+                const isStarred = bookmarkedRegistry.includes(tool.name);
+                const isPopular = trendingTools.includes(tool.name);
+                const isAi = aiDrivenTools.includes(tool.name);
+
+                const card = document.createElement("div");
+                card.classList.add("grid-card");
+
+                card.innerHTML = `
+                    <div>
+                        <div class="meta-container">
+                            <div class="badges-cluster">
+                                <span class="status-badge ${tool.pricing}">${tool.pricing}</span>
+                                ${isPopular ? '<span class="status-badge popular">POPULAR</span>' : ''}
+                                ${isAi ? '<span class="status-badge ai-badge">AI</span>' : ''}
+                            </div>
+                            <button class="bookmark-star ${isStarred ? 'starred' : ''}" onclick="toggleBookmark('${tool.name}', event)">★</button>
+                        </div>
+                        <span class="hierarchy-tag">${tool.category}</span>
+                        <h3>${tool.name}</h3>
+                        <p>${tool.desc}</p>
+                    </div>
+                    <div class="card-footer-actions">
+                        <a href="${tool.link}" target="_blank" class="action-link">Open Application ↗</a>
+                        <button class="report-btn" onclick="reportBrokenLink('${tool.name}', event)">Report link</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        let currentActiveGroup = 'all';
+        let currentPricingFilter = 'all';
+
+        function filterCategory(categoryName) {
+            // 💡 फिक्स: जब भी किसी कैटेगरी बटन पर क्लिक हो, सर्च बार को खाली कर दो
+            document.getElementById("directorySearch").value = "";
+
+            currentActiveGroup = categoryName;
+            const buttons = document.querySelectorAll('.category-trigger');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (categoryName === 'all') {
+                document.getElementById('trigger-all').classList.add('active');
+            } else if (categoryName === 'bookmarks_panel') {
+                document.getElementById('trigger-bookmarks').classList.add('active');
+            } else {
+                const dynamicId = `trigger-${categoryName.replace(/\s+/g, '-').toLowerCase()}`;
+                const targetBtn = document.getElementById(dynamicId);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+
+            executeCombinedProcessing();
+        }
+
+        function setPricingFilter(filterType) {
+            currentPricingFilter = filterType;
+            const capsules = document.querySelectorAll('.capsule-btn');
+            capsules.forEach(cap => cap.classList.remove('active'));
+            document.getElementById(`filter-${filterType}`).classList.add('active');
+
+            executeCombinedProcessing();
+        }
+
+        function toggleBookmark(toolName, event) {
+            event.stopPropagation();
+            if (bookmarkedRegistry.includes(toolName)) {
+                bookmarkedRegistry = bookmarkedRegistry.filter(name => name !== toolName);
+            } else {
+                bookmarkedRegistry.push(toolName);
+            }
+            localStorage.setItem('vortex_bookmarks', JSON.stringify(bookmarkedRegistry));
+            executeCombinedProcessing();
+        }
+
+        function reportBrokenLink(toolName, event) {
+            event.stopPropagation();
+            alert(`📝 Error report logged for "${toolName}". Our systems will evaluate this endpoint.`);
+        }
+
+        function triggerSearch() {
+            const searchInput = document.getElementById("directorySearch");
+            const dropPanel = document.getElementById("autoDrop");
+            const query = searchInput.value.toLowerCase().trim();
+
+            if (!query) {
+                dropPanel.style.display = "none";
+                executeCombinedProcessing();
+                return;
+            }
+
+            const matchedCats = uniqueSubCategories.filter(cat => cat.toLowerCase().includes(query));
+
+            if (matchedCats.length > 0) {
+                dropPanel.innerHTML = "";
+                matchedCats.forEach(cat => {
+                    const row = document.createElement("div");
+                    row.classList.add("autocomplete-row");
+                    row.innerText = cat;
+                    row.onclick = () => {
+                        searchInput.value = cat;
+                        dropPanel.style.display = "none";
+                        filterCategory(cat);
+                    };
+                    dropPanel.appendChild(row);
+                });
+                dropPanel.style.display = "block";
+            } else {
+                dropPanel.style.display = "none";
+            }
+            executeCombinedProcessing();
+        }
+
+        function executeCombinedProcessing() {
+            const queryStr = document.getElementById("directorySearch").value.toLowerCase().trim();
+
+            const compilation = masterToolsRegistry.filter(tool => {
+                let isolationMatch = false;
+                if (currentActiveGroup === 'all') {
+                    isolationMatch = true;
+                } else if (currentActiveGroup === 'bookmarks_panel') {
+                    isolationMatch = bookmarkedRegistry.includes(tool.name);
+                } else {
+                    isolationMatch = (tool.category === currentActiveGroup);
+                }
+
+                let pricingMatch = (currentPricingFilter === 'all' || tool.pricing === currentPricingFilter);
+                let contextualMatch = tool.category.toLowerCase().includes(queryStr) || tool.name.toLowerCase().includes(queryStr) || tool.parentField.toLowerCase().includes(queryStr);
+
+                return isolationMatch && pricingMatch && contextualMatch;
+            });
+
+            presentSortedTools(compilation);
+        }
+
+        document.addEventListener("click", function (e) {
+            if (e.target.id !== "directorySearch") {
+                document.getElementById("autoDrop").style.display = "none";
+            }
+        });
+
+        window.onload = () => {
+            renderEcosystemControls();
+            presentSortedTools(masterToolsRegistry);
+        };
+    </script>
+</body>
+
+</html>
